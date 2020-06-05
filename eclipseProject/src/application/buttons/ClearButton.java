@@ -2,9 +2,8 @@ package application.buttons;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 
-public class ClearButton extends Button{
+public class ClearButton extends NumpadButton{
 	public ClearButton() {
 		super("C");
 		this.setOnAction(new EventHandler<ActionEvent>() {
