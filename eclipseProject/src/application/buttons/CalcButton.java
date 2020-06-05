@@ -26,14 +26,17 @@ public class CalcButton extends NumpadButton{
 		//starts the operation
 		Main util = new Main();
 		//converts Strings from TextField
-		int baseInt = Integer.parseInt(base.getText());
-		int moduleInt = Integer.parseInt(module.getText());
+		int baseInt = 0, moduleInt = 0;
 		
-		//module-operation
-		ModuloUtils mod = new ModuloUtils();
-		int res = mod.modulo(baseInt, moduleInt);
-		
-		//print result
-		result.setText(Integer.toString(res));
+		try {
+			baseInt = Integer.parseInt(base.getText());
+			moduleInt = Integer.parseInt(module.getText());
+			//module-operation
+			ModuloUtils mod = new ModuloUtils();
+			int res = mod.modulo(baseInt, moduleInt);
+			//print result
+			result.setText(Integer.toString(res));
+		}catch(Exception e) {}
+
 	}
 }
