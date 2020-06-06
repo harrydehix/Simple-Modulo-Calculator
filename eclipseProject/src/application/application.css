@@ -1,1 +1,118 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
+*{
+	-fx-focus-color: transparent;
+	-fx-faint-focus-color: transparent;
+	-fx-border-insets: 0, 0, 1, 2;
+    -fx-background-insets: 0, 0, 1, 2;
+}
+*:focused{
+    -fx-border-insets: 0, 0, 1, 2;
+    -fx-background-insets: 0, 0, 1, 2;
+    -fx-focus-color: transparent;
+	-fx-faint-focus-color: transparent;
+}
+
+#root{
+	-fx-background-color: #222233;
+	-fx-padding: 0;
+}
+
+/* Top area */
+
+#input-field{
+	-fx-pref-height: 100;
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-padding: 5;
+	-fx-background-color: #222233;
+}
+
+#input-field *{
+	-fx-text-fill: #969696;
+}
+
+TextField, TextField:focused{
+	-fx-background-color: transparent;
+	-fx-border-color: #474747;
+	-fx-border-width: 0 0 2 0;
+	-fx-font-size: 30;
+	-fx-pref-width: 100;
+	-fx-pref-height: 100;
+	
+}
+
+TextField.selected{
+	-fx-border-color: #7295FF;
+	-fx-text-fill: #fff !important;
+}
+.result{
+	-fx-border-color: #88FF6B;
+	-fx-text-fill: #fff !important;
+}
+
+Label{
+	-fx-font-size: 30;
+	-fx-pref-height: 100;
+	-fx-text-alignment: center;
+}
+
+#operator{
+	-fx-pref-width: 30;
+	-fx-text-fill: #7295FF;
+}
+
+#equals{
+	-fx-pref-width: 30;
+	-fx-text-fill: #7295FF;
+}
+
+#result{
+	-fx-pref-width: 90;
+}
+
+/* Botton area */
+
+#numpad{
+	-fx-background-color: #3D4759;
+	-fx-pref-width: 400;
+	-fx-pref-height: 500;
+}
+#numpad.hovered{
+	-fx-background-color: #526078;
+}
+
+NumberButton, ClearButton, CalcButton{
+	-fx-background-color: #3D4759;
+	-fx-text-fill: #fff;
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-background-radius: 0;
+	-fx-border-radius: 0;
+	-fx-font-size: 40;
+	-fx-cursor: hand;
+	-fx-max-width: Infinity;
+	-fx-max-height: Infinity;
+}
+
+NumberButton:hover{
+	-fx-background-color: #526078;
+}
+
+ClearButton{
+	-fx-background-color: #7E97CF;
+	-fx-text-fill: #3D4759;
+	-fx-background-radius: 50 0 0 0;
+	-fx-border-radius: 50 0 0 0;
+}
+
+ClearButton:hover{
+	-fx-background-color: #6579A6;
+}
+
+CalcButton{
+	-fx-background-color: #81CF61;
+	-fx-text-fill: #3D4759;
+}
+
+CalcButton:hover{
+	-fx-background-color: #6FB354;
+}
