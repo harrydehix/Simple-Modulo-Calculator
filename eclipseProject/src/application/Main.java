@@ -4,9 +4,11 @@ import application.buttons.CalcButton;
 import application.buttons.ClearButton;
 import application.buttons.NumberButton;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -84,20 +86,34 @@ public class Main extends Application {
 			
 			GridPane numpad = new GridPane();
 			numpad.setId("numpad");
+			NumberButton b7 = new NumberButton(7, base, module, result, false, numpad);
+			NumberButton b8 = new NumberButton(8, base, module, result, false, numpad);
+			NumberButton b9 = new NumberButton(9, base, module, result, false, numpad);
 			
-			numpad.add(new NumberButton(7, base, module, result, false, numpad), 0, 0);
-			numpad.add(new NumberButton(8, base, module, result, false, numpad), 1, 0);
-			numpad.add(new NumberButton(9, base, module, result, false, numpad), 2, 0);
+			NumberButton b4 = new NumberButton(4, base, module, result, false, numpad);
+			NumberButton b5 = new NumberButton(5, base, module, result, false, numpad);
+			NumberButton b6 = new NumberButton(6, base, module, result, false, numpad);
 			
-			numpad.add(new NumberButton(4, base, module, result, false, numpad), 0, 1);
-			numpad.add(new NumberButton(5, base, module, result, false, numpad), 1, 1);
-			numpad.add(new NumberButton(6, base, module, result, false, numpad), 2, 1);
+			NumberButton b1 = new NumberButton(1, base, module, result, false, numpad);
+			NumberButton b2 = new NumberButton(2, base, module, result, true, numpad);
+			NumberButton b3 = new NumberButton(3, base, module, result, false, numpad);
 			
-			numpad.add(new NumberButton(1, base, module, result, false, numpad), 0, 2);
-			numpad.add(new NumberButton(2, base, module, result, true, numpad), 1, 2);
-			numpad.add(new NumberButton(3, base, module, result, false, numpad), 2, 2);
+			NumberButton b0 = new NumberButton(0, base, module, result, true, numpad);
 			
-			numpad.add(new NumberButton(0, base, module, result, true, numpad), 0, 3);
+			
+			numpad.add(b7, 0, 0);
+			numpad.add(b8, 1, 0);
+			numpad.add(b9, 2, 0);
+			
+			numpad.add(b4, 0, 1);
+			numpad.add(b5, 1, 1);
+			numpad.add(b6, 2, 1);
+			
+			numpad.add(b1, 0, 2);
+			numpad.add(b2, 1, 2);
+			numpad.add(b3, 2, 2);
+			
+			numpad.add(b0, 0, 3);
 			numpad.add(new ClearButton(base, module, result), 1, 3);
 			numpad.add(new CalcButton(base, module, result), 2, 3);
 			
@@ -108,29 +124,28 @@ public class Main extends Application {
 			module.setOnKeyPressed(new EventHandler<KeyEvent>() {
 				@Override
 				public void handle(KeyEvent event) {
-					handleGlobalKeyEvent(event, base, module);
+					handleGlobalKeyEvent(event, base, module, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9);
 					event.consume();
 				}
 			});
 			base.setOnKeyPressed(new EventHandler<KeyEvent>() {
 				@Override
 				public void handle(KeyEvent event) {
-					handleGlobalKeyEvent(event, base, module);
+					handleGlobalKeyEvent(event, base, module, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9);
 					event.consume();
 				}
 			});
 			result.setOnKeyPressed(new EventHandler<KeyEvent>() {
 				@Override
 				public void handle(KeyEvent event) {
-					handleGlobalKeyEvent(event, base, module);
+					handleGlobalKeyEvent(event, base, module, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9);
 					event.consume();
 				}
 			});
 			scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 				@Override
 				public void handle(KeyEvent event) {
-					handleGlobalKeyEvent(event, base, module);
-					event.consume();
+					handleGlobalKeyEvent(event, base, module, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9);
 				}
 			});
 			
@@ -145,13 +160,7 @@ public class Main extends Application {
 		}
 	}
 	
-	/**
-	 * This method gets executed when some key is pressed.
-	 * @param event
-	 * @param base
-	 * @param module
-	 */
-	public static void handleGlobalKeyEvent(KeyEvent event, TextField base, TextField module) {
+	public static void handleGlobalKeyEvent(KeyEvent event, TextField base, TextField module, Button... buttons) {
 		switch(event.getCode()) {
 		case BACK_SPACE:
 			// What happens on pressing backspace
@@ -173,96 +182,67 @@ public class Main extends Application {
 		case DIGIT0:
 		case NUMPAD0:
 			// What happens on pressing 0
-			
-			switch(selectedField) {
-			case 1: base.setText(base.getText() + "0"); break;
-			case 2: module.setText(module.getText() + "0"); break;
-			}
+
+			buttons[0].fireEvent(new ActionEvent());
 			break;
 		case DIGIT1:
 		case NUMPAD1:	
 			// What happens on pressing 1
 			
-			switch(selectedField) {
-			case 1: base.setText(base.getText() + "1"); break;
-			case 2: module.setText(module.getText() + "1"); break;
-			}
+			buttons[1].fireEvent(new ActionEvent());
 			break;
 		case DIGIT2:
 		case NUMPAD2:
 			// What happens on pressing 2
 			
-			switch(selectedField) {
-			case 1: base.setText(base.getText() + "2"); break;
-			case 2: module.setText(module.getText() + "2"); break;
-			}
+			buttons[2].fireEvent(new ActionEvent());
 			break;
 		case DIGIT3:
 		case NUMPAD3:
 			// What happens on pressing 3
 			
-			switch(selectedField) {
-			case 1: base.setText(base.getText() + "3"); break;
-			case 2: module.setText(module.getText() + "3"); break;
-			}
+			buttons[3].fireEvent(new ActionEvent());
 			break;
 		case DIGIT4:
 		case NUMPAD4:
 			// What happens on pressing 4
 			
-			switch(selectedField) {
-			case 1: base.setText(base.getText() + "4"); break;
-			case 2: module.setText(module.getText() + "4"); break;
-			}
+			buttons[4].fireEvent(new ActionEvent());
 			break;
 		case DIGIT5:
 		case NUMPAD5:
 			// What happens on pressing 5
 			
-			switch(selectedField) {
-			case 1: base.setText(base.getText() + "5"); break;
-			case 2: module.setText(module.getText() + "5"); break;
-			}
+			buttons[5].fireEvent(new ActionEvent());
 			break;
 		case DIGIT6:
 		case NUMPAD6:
 			// What happens on pressing 6
 			
-			switch(selectedField) {
-			case 1: base.setText(base.getText() + "6"); break;
-			case 2: module.setText(module.getText() + "6"); break;
-			}
+			buttons[6].fireEvent(new ActionEvent());
 			break;
 		case DIGIT7:
 		case NUMPAD7:
 			// What happens on pressing 7
 			
-			switch(selectedField) {
-			case 1: base.setText(base.getText() + "7"); break;
-			case 2: module.setText(module.getText() + "7"); break;
-			}
+			buttons[7].fireEvent(new ActionEvent());
 			break;
 		case DIGIT8:
 		case NUMPAD8:
 			// What happens on pressing 8
 			
-			switch(selectedField) {
-			case 1: base.setText(base.getText() + "8"); break;
-			case 2: module.setText(module.getText() + "8"); break;
-			}
+			buttons[8].fireEvent(new ActionEvent());
 			break;
 		case DIGIT9:
 		case NUMPAD9:
 			// What happens on pressing 9
 			
-			switch(selectedField) {
-			case 1: base.setText(base.getText() + "9"); break;
-			case 2: module.setText(module.getText() + "9"); break;
-			}
+			buttons[9].fireEvent(new ActionEvent());
 			break;
 		default:
 			break;
 		}
+		event.consume();
 	}
 	
 	public static void main(String[] args) {
